@@ -79,7 +79,7 @@ trap(struct trapframe *tf)
   case T_IRQ0 + 7:
   case T_IRQ0 + IRQ_SPURIOUS:
     cprintf("cpu%d: spurious interrupt at %x:%x\n",
-            cpunum(), tf->cs, tf->eip);
+            cpuid(), tf->cs, tf->eip);
     lapiceoi();
     break;
 
@@ -94,7 +94,7 @@ trap(struct trapframe *tf)
     // In user space, assume process misbehaved.
     cprintf("pid %d %s: trap %d err %d on cpu %d "
             "eip 0x%x addr 0x%x--kill proc\n",
-            proc->pid, proc->name, tf->trapno, tf->err, cpunum(), tf->eip,
+            proc->pid, proc->name, tf->trapno, tf->err, cpuid(), tf->eip,
             rcr2());
     proc->killed = 1;
   }
