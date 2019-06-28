@@ -48,7 +48,7 @@ trap(struct trapframe *tf)
 
   switch(tf->trapno){
   case T_IRQ0 + IRQ_TIMER:
-    if(cpunum() == 0){
+    if(cpuid() == 0){
       acquire(&tickslock);
       ticks++;
       if(proc && proc->state == RUNNING)
@@ -88,7 +88,7 @@ trap(struct trapframe *tf)
     if(proc == 0 || (tf->cs&3) == 0){
       // In kernel, it must be our mistake.
       cprintf("unexpected trap %d from cpu %d eip %x (cr2=0x%x)\n",
-              tf->trapno, cpunum(), tf->eip, rcr2());
+              tf->trapno, cpuid(), tf->eip, rcr2());
       panic("trap");
     }
     // In user space, assume process misbehaved.
