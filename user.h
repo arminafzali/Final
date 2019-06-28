@@ -35,15 +35,16 @@ int getChildPiorityAt(int childAt);
 //int calculatePerfomance(int rtime,int ctime,int etime,int* wAndrTime);
 
 // ulib.c
-int stat(char*, struct stat*);
-char* strcpy(char*, char*);
-void *memmove(void*, void*, int);
+int stat(const char*, struct stat*);
+char* strcpy(char*, const char*);
+void *memmove(void*, const void*, int);
 char* strchr(const char*, char c);
 int strcmp(const char*, const char*);
-void printf(int, char*, ...);
+void printf(int, const char*, ...);
 char* gets(char*, int max);
-uint strlen(char*);
+uint strlen(const char*);
 void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
+
